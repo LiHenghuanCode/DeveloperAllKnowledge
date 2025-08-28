@@ -90,3 +90,9 @@ String 在源码中使用 char[] 来维护字符序列的，而 char[] 的长度
 ### 5、String中 “+” 和 StringBuffer 中的 append 会有性能上的差别吗？
 
 String 的 “+” 效率低于 StringBuffer 的 append( )。原因在于 String 是不可变类，任何对 String 的操作都会创建新的 String 对象。而 “+” 的执行过程实际上是先创建了一个 StringBuffer，然后调用 append( )，最后在 toString( )。效率上肯定是不如 StringBuffer 直接 append( ) 高的。
+
+### 6.StringBuilder、StringBuffer有什么区别？
+
+StringBuilder 和 StringBuffer 都是可变类，任何对它们的操作都不会产生新的对象。两者的区别在于：StringBuilder 没有加锁不是线程安全的，而 StringBuffer 大多数方法都加了 synchronized，是线程安全的，但执行效率会低点。
+
+源码中有一个细节，就是 StringBuffer 的 append 方法在执行真正的字符串拼接逻辑之前，会先清除 toStringCache，它是用来缓存最后一次 toString 结果的地方，主要用来加快 toString 的执行效率。
