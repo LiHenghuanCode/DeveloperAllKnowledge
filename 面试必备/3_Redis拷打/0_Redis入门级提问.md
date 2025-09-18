@@ -24,3 +24,5 @@ Redis 一开始把监听 socket（server socket）注册到 epoll。
 事件循环就触发 readQueryFromClient，Redis 从这个 socket 里读数据 → 解析命令 → 执行 → 把结果放进回复缓冲区。
 
 有数据要回给客户端时，再注册“可写事件”，由 sendReplyToClient 把结果写回去。
+
+## 2.简单说一下 Redis 6.0 之后出现了哪些新变化？
